@@ -1,10 +1,14 @@
 from django.contrib import admin
-from .models import About, CollaborateRequest
 from django_summernote.admin import SummernoteModelAdmin
-
+from .models import About, CollaborateRequest
 
 @admin.register(About)
 class AboutAdmin(SummernoteModelAdmin):
+    """
+    Admin view for :model:`about.About`.
+    Displays the title and updated_on fields in the admin list view.
+    Allows searching by title and filtering by updated_on.
+    """
     summernote_fields = ('content',)
 
 # Note: admin.ModelAdmin is the standard way of registering

@@ -1,10 +1,14 @@
 from django.contrib import admin
-from .models import Post, Comment
 from django_summernote.admin import SummernoteModelAdmin
-
+from .models import Post, Comment
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
+    """
+    Admin view for :model:`blog.Post`.
+    Displays the title, slug, status and created_on fields in the admin list view.
+    Allows searching by title and content, and filtering by status and created_on.
+    """
     list_display = ('title', 'slug', 'status', 'created_on')
     search_fields = ['title', 'content']
     list_filter = ('status', 'created_on',)
