@@ -37,6 +37,8 @@ ALLOWED_HOSTS = [".herokuapp.com", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    "channels",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +58,14 @@ INSTALLED_APPS = [
     "chatbox",
 
 ]
+
+ASGI_APPLICATION = "codestar.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    }
+}
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
