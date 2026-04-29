@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="chat-wrapper">
+  <div class="chat-header">
+    <h2>{{ room.name }}</h2>
+    <p>Logged in as {{ request.user.username }}</p>
+  </div>
+
+  <div class="chat-messages">
+    {% for msg in chat_messages %}
+      <div class="chat-row {% if msg.user == request.user %}chat-row-me{% else %}chat-row-other{% endif %}">
+        <div class="chat-bubble">
+            <div class="chat-user">{{ msg.user.username }}</div>
+
+            <!-- 👇 MESSAGE -->
+            <div class="chat-text">{{ msg.message }}</div>
+
+            <!-- 👇 TIME (ADD HERE) -->
+            <small class="chat-time">
+              {{ msg.created_on|date:"H:i" }}
+            </small>
+          </div>
+      </div>
+    {% empty %}
+      <p class="empty-chat">No messages yet. Start the conversation!</p>
+    {% endfor %}
+  </div>
+
+  <form method="post" class="chat-form">
+    {% csrf_token %}
+    <input type="text" name="message" placeholder="Type a message..." required>
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+{% endblock content %}

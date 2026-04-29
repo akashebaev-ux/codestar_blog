@@ -3,6 +3,7 @@
 
 {% url 'home' as home_url %}
 {% url "about" as about_url %}
+{% url "chat" as chatbox_url %}
 {% url "account_login" as login_url %}
 {% url "account_signup" as signup_url %}
 {% url "account_logout" as logout_url %}
@@ -52,6 +53,10 @@
                         <a class="nav-link {% if request.path == about_url %}
                         active" aria-current="page{% endif %}" href="{% url 'about' %}">About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'chat' %}active{% endif %}"
+                            href="{% url 'chat' %}">Chat</a>
+                        </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %} active " aria-current="page{% endif %}" 
@@ -80,6 +85,7 @@
      <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
+                {% comment %}
                 {% for message in messages %}
                 <div class="alert {{message.tags}} alert-dismissible fade show" id="msg" role="alert">
                     {{ message | safe  }}
@@ -87,6 +93,7 @@
                     </button>
                 </div> 
                 {% endfor %}
+                {% endcomment %}
             </div>
         </div>
      </div>
