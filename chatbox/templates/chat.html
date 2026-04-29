@@ -40,7 +40,9 @@
 
 <script>
 const currentUser = "{{ request.user.username }}";
-const socket = new WebSocket('ws://' + window.location.host + '/ws/chat/');
+const socket = new WebSocket(
+  (window.location.protocol === "https:" ? "wss://" : "ws://") +
+  window.location.host + "/ws/chat/");
 
 const form = document.querySelector('.chat-form');
 const input = document.querySelector('input[name="message"]');
